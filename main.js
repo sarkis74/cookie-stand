@@ -3,8 +3,12 @@ var firstPike = {
     maxCust: 65,
     avgSale: 6.3,
 
-    custPerHr: function(num) {
-        return Math.floor(Math.random() * Math.floor()) * this.avgSale
+    custPerHr: function() {
+        num = Math.floor(Math.random() * Math.floor()) 
+    },
+
+    cookPurch: function() {
+        cook = num * this.avgSale
     }
 }
 
@@ -13,8 +17,12 @@ var seaTac = {
     maxCust: 24,
     avgSale: 1.2,
 
-    custPerHr: function(num) {
-        return Math.floor(Math.random() * Math.floor()) * this.avgSale
+    custPerHr: function() {
+        num = Math.floor(Math.random() * Math.floor()) 
+    },
+
+    cookPurch: function() {
+        cook = num * this.avgSale
     }
 }
 
@@ -23,8 +31,12 @@ var seaCent = {
     maxCust: 38,
     avgSale: 3.7,
 
-    custPerHr: function(num) {
-        return Math.floor(Math.random() * Math.floor()) * this.avgSale
+    custPerHr: function() {
+        num = Math.floor(Math.random() * Math.floor()) 
+    },
+
+    cookPurch: function() {
+        cook = num * this.avgSale
     }
 }
 
@@ -35,6 +47,10 @@ var capHill = {
 
     custPerHr: function(num) {
         return Math.floor(Math.random() * Math.floor()) * this.avgSale
+    },
+
+    cookPurch: function() {
+        cook = num * this.avgSale
     }
 }
 
@@ -45,5 +61,9 @@ var alki = {
 
     custPerHr: function(num) {
         return Math.floor(Math.random() * Math.floor()) * this.avgSale
+    },
+
+    cookPurch: function() {
+        cook = num * this.avgSale
     }
 }
