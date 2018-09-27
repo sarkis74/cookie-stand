@@ -1,277 +1,320 @@
-var firstPike = {
-    name: "First and Pike",
+var pikePlace = {
+    name: "1st and Pike",
     minCust: 23,
     maxCust: 65,
     avgSale: 6.3,
-
-    cookPerHr: function() {
-        //Create list element
-        // var header = document.createElement('h6');   // Create a <h2> element
-        // header.textContent = this.name
-
-        var listContainer = document.createElement('div');
-        document.getElementsByTagName('body')[0].appendChild(listContainer);
-
-        // var header = document.createElement('h6');   // Create a <h2> element
-        // header.textContent = this.name;
-        // document.getElementsByTagName('h6')[0].appendChild(header);                                                   
-        // var text = document.createTextNode("1st and Pike");     // Create a text node
-        // header.appendChild(text);   // Append the text to <h6> 
-
-        var listEl = document.createElement('ul');
-        document.getElementsByTagName('ul')[0].appendChild(listEl);
-
-        listContainer.appendChild(listEl);
-
-        var myArr1 = [];
-
-        for(var i = 0; i < 15; i++) {
-            // Creates the list item:
-            var item = document.createElement('li');
-
-            // Creates random number of cookies sold each hour and stores all 15 results in array
-            num1 = Math.floor(Math.random() * (this.max - this.min) + this.min);
-            
-            myArr1.push(num1);
-            console.log(myArr1);
-
-            // Add the item text
-            var meridiem = 'am';
-            if(i > 4) {
-                meridiem = 'pm';
-            }
-            var mod = (18 + i) % 12; 
-            var line = mod + meridiem + ' : ' + myArr1[i] + ' cookies';
-            // list.innerHTML = myArr1[i];
-
-            // Placing contents:
-            item.innerHTML = line;
-
-
-            //var newText = document.createTextNode(line);
-            listEl.appendChild(item);
-
-        } return myArr1;
-    },
+    cookiesSoldPerHr: [],
+};
+     pikePlace.calcCustPerHr = function() {
+        var randPerHr = Math.floor(Math.random() * (this.maxCust - this.minCust + 1) + this.minCust);
+        return Math.floor(Math.random() * (this.maxCust - this.minCust + 1) + this.minCust) * Math.ceil(this.avgSale); 
+        
 };
 
-firstPike.cookPerHr();
+    pikePlace.calcCookiesPerHr = function() {
+        console.log(this);
+        for(var i = 0; i < 16; i++) {  
+        this.cookiesSoldPerHr.push(this.calcCustPerHr());
+        }
+    };
+
+    pikePlace.renderHours = function() {
+        this.calcCookiesPerHr();
+
+        //Reference containing element
+        var listContainer = document.getElementById('sales-list');
+        //console.log(listContainer);
+        //Creating new element 
+        var headEl = document.createElement('h3');
+        headEl.textContent = this.name;
+        //Appending child element to parent
+        listContainer.appendChild(headEl);
+
+        var listEl = document.createElement('ul');
+
+        var total = 0;
+
+        for(var i in this.cookiesSoldPerHr) {
+        console.log(this.cookiesSoldPerHr);
+        // Add the items' text for store hours
+        var meridiem = 'am';
+        if(i > 5) {
+            meridiem = 'pm';
+        }
+        var mod = ((22 + i) % 12) + 2; 
+        if(mod === 13) {
+            mod = 1;
+        }
+
+        var itemEl = document.createElement('li');
+        itemEl.textContent = mod + meridiem + ' : ' + this.cookiesSoldPerHr[i] + ' cookies';
+        listEl.appendChild(itemEl);
+
+        total = total + this.cookiesSoldPerHr[i];
+        console.log(total);
+    }   
+        this.cookiesSoldPerHr.push(total);
+        itemEl.textContent = 'Total: ' + total + ' cookies';
+        listEl.appendChild(itemEl);
+        listContainer.appendChild(listEl); //Append ul to div
+};
+
+pikePlace.renderHours();
 
 
 var seaTac = {
+    name: 'Sea-Tac Airport',
     minCust: 3,
     maxCust: 24,
     avgSale: 1.2,
+    cookiesSoldPerHr: [],
+};
+seaTac.calcCustPerHr = function() {
+   var randPerHr = Math.floor(Math.random() * (this.maxCust - this.minCust + 1) + this.minCust);
+   return Math.floor(Math.random() * (this.maxCust - this.minCust + 1) + this.minCust) * Math.ceil(this.avgSale); 
+   
+};
 
-    cookPerHr: function() {
-        //Create list element
-        var listContainer = document.createElement('div');
-        document.getElementsByTagName('body')[0].appendChild(listContainer);
+seaTac.calcCookiesPerHr = function() {
+   console.log(this);
+   for(var i = 0; i < 16; i++) {  
+   this.cookiesSoldPerHr.push(this.calcCustPerHr());
+   }
+};
 
-        // var header = document.createElement('h6');   // Create a <h2> element
-        // document.getElementsByTagName('h6')[0].appendChild(header);                                                   
-        // var text = document.createTextNode("SeaTac Airport");     // Create a text node
-        // header.appendChild(text);   // Append the text to <h2> 
+seaTac.renderHours = function() {
+   this.calcCookiesPerHr();
 
-        var listEl = document.createElement('ul');
-        document.getElementsByTagName('ul')[0].appendChild(listEl);
+   //Reference containing element
+   var listContainer = document.getElementById('sales-list');
+   //console.log(listContainer);
+   //Creating new element 
+   var headEl = document.createElement('h3');
+   headEl.textContent = this.name;
+   //Appending child element to parent
+   listContainer.appendChild(headEl);
 
-        listContainer.appendChild(listEl);
+   var listEl = document.createElement('ul');
 
-        var myArr2 = [];
+   var total = 0;
 
-        for(var i = 0; i < 15; i++) {
-            // Creates the list item:
-            var item = document.createElement('li');
+   for(var i in this.cookiesSoldPerHr) {
+   console.log(this.cookiesSoldPerHr);
+   // Add the items' text for store hours
+   var meridiem = 'am';
+   if(i > 5) {
+       meridiem = 'pm';
+   }
+   var mod = ((22 + i) % 12) + 2; 
+   if(mod === 13) {
+       mod = 1;
+   }
 
-            // Creates random number of cookies sold each hour and stores all 15 results in array
-            num2 = Math.floor(Math.random() * 10) * Math.ceil(this.avgSale);
-            
-            myArr2.push(num2);
-            console.log(myArr2);
+   var itemEl = document.createElement('li');
+   itemEl.textContent = mod + meridiem + ' : ' + this.cookiesSoldPerHr[i] + ' cookies';
+   listEl.appendChild(itemEl);
 
-            // Add the item text
-            var meridiem = 'am';
-            if(i > 4) {
-                meridiem = 'pm';
-            }
-            var mod = (18 + i) % 12; 
-            var line = mod + meridiem + ' : ' + myArr2[i] + ' cookies';
-            // list.innerHTML = myArr1[i];
+   total = total + this.cookiesSoldPerHr[i];
+   console.log(total);
+}   
+   this.cookiesSoldPerHr.push(total);
+   itemEl.textContent = 'Total: ' + total + ' cookies';
+   listEl.appendChild(itemEl);
+   listContainer.appendChild(listEl); //Append ul to div
+};
 
-            // Placing contents:
-            item.innerHTML = line;
+seaTac.renderHours();
 
-
-            //var newText = document.createTextNode(line);
-            listEl.appendChild(item);
-
-        } return myArr2;
-    },
-}
-
-seaTac.cookPerHr();
 
 var seaCent = {
+    name: 'Seattle Center',
     minCust: 11,
     maxCust: 38,
     avgSale: 3.7,
+    cookiesSoldPerHr: [],
+};
+seaCent.calcCustPerHr = function() {
+   var randPerHr = Math.floor(Math.random() * (this.maxCust - this.minCust + 1) + this.minCust);
+   return Math.floor(Math.random() * (this.maxCust - this.minCust + 1) + this.minCust) * Math.ceil(this.avgSale); 
+   
+};
 
-    cookPerHr: function() {
-        //Create list element
-        var listContainer = document.createElement('div');
-        document.getElementsByTagName('body')[0].appendChild(listContainer);
+seaCent.calcCookiesPerHr = function() {
+   console.log(this);
+   for(var i = 0; i < 16; i++) {  
+   this.cookiesSoldPerHr.push(this.calcCustPerHr());
+   }
+};
 
-        // var header = document.createElement('h6');   // Create a <h2> element
-        // document.getElementsByTagName('h6')[0].appendChild(header);                                                   
-        // var text = document.createTextNode("Seattle Center");     // Create a text node
-        // header.appendChild(text);   // Append the text to <h2> 
+seaCent.renderHours = function() {
+   this.calcCookiesPerHr();
 
-        var listEl = document.createElement('ul');
-        document.getElementsByTagName('ul')[0].appendChild(listEl);
+   //Reference containing element
+   var listContainer = document.getElementById('sales-list');
+   //console.log(listContainer);
+   //Creating new element 
+   var headEl = document.createElement('h3');
+   headEl.textContent = this.name;
+   //Appending child element to parent
+   listContainer.appendChild(headEl);
 
-        listContainer.appendChild(listEl);
+   var listEl = document.createElement('ul');
 
-        var myArr3 = [];
+   var total = 0;
 
-        for(var i = 0; i < 15; i++) {
-            // Creates the list item:
-            var item = document.createElement('li');
+   for(var i in this.cookiesSoldPerHr) {
+   console.log(this.cookiesSoldPerHr);
+   // Add the items' text for store hours
+   var meridiem = 'am';
+   if(i > 5) {
+       meridiem = 'pm';
+   }
+   var mod = ((22 + i) % 12) + 2; 
+   if(mod === 13) {
+       mod = 1;
+   }
 
-            // Creates random number of cookies sold each hour and stores all 15 results in array
-            num3 = Math.floor(Math.random() * 10) * Math.ceil(this.avgSale);
-            
-            myArr3.push(num3);
-            console.log(myArr3);
+   var itemEl = document.createElement('li');
+   itemEl.textContent = mod + meridiem + ' : ' + this.cookiesSoldPerHr[i] + ' cookies';
+   listEl.appendChild(itemEl);
 
-            // Add the item text
-            var meridiem = 'am';
-            if(i > 4) {
-                meridiem = 'pm';
-            }
-            var mod = (18 + i) % 12; 
-            var line = mod + meridiem + ' : ' + myArr3[i] + ' cookies';
-            // list.innerHTML = myArr1[i];
+   total = total + this.cookiesSoldPerHr[i];
+   console.log(total);
+}   
+   this.cookiesSoldPerHr.push(total);
+   itemEl.textContent = 'Total: ' + total + ' cookies';
+   listEl.appendChild(itemEl);
+   listContainer.appendChild(listEl); //Append ul to div
+};
 
-            // Placing contents:
-            item.innerHTML = line;
-
-
-            //var newText = document.createTextNode(line);
-            listEl.appendChild(item);
-
-        } return myArr3;
-    },
-}
-
-seaCent.cookPerHr();
+seaCent.renderHours();
 
 
 var capHill = {
+    name: 'Capitol Hill',
     minCust: 20,
     maxCust: 38,
     avgSale: 2.3,
+    cookiesSoldPerHr: [],
+};
+capHill.calcCustPerHr = function() {
+   var randPerHr = Math.floor(Math.random() * (this.maxCust - this.minCust + 1) + this.minCust);
+   return Math.floor(Math.random() * (this.maxCust - this.minCust + 1) + this.minCust) * Math.ceil(this.avgSale); 
+   
+};
 
-    cookPerHr: function() {
-        //Create list element
-        var listContainer = document.createElement('div');
-        document.getElementsByTagName('body')[0].appendChild(listContainer);
+capHill.calcCookiesPerHr = function() {
+   console.log(this);
+   for(var i = 0; i < 16; i++) {  
+   this.cookiesSoldPerHr.push(this.calcCustPerHr());
+   }
+};
 
-        // var header = document.createElement('h6');   // Create a <h2> element
-        // document.getElementsByTagName('h6')[0].appendChild(header);                                                   
-        // var text = document.createTextNode("Capitol Hill");     // Create a text node
-        // header.appendChild(text);   // Append the text to <h2>
+capHill.renderHours = function() {
+   this.calcCookiesPerHr();
 
-        var listEl = document.createElement('ul');
-        document.getElementsByTagName('ul')[0].appendChild(listEl);
+   //Reference containing element
+   var listContainer = document.getElementById('sales-list');
+   //console.log(listContainer);
+   //Creating new element 
+   var headEl = document.createElement('h3');
+   headEl.textContent = this.name;
+   //Appending child element to parent
+   listContainer.appendChild(headEl);
 
-        listContainer.appendChild(listEl);
+   var listEl = document.createElement('ul');
 
-        var myArr4 = [];
+   var total = 0;
 
-        for(var i = 0; i < 15; i++) {
-           // Creates the list item:
-           var item = document.createElement('li');
+   for(var i in this.cookiesSoldPerHr) {
+   console.log(this.cookiesSoldPerHr);
+   // Add the items' text for store hours
+   var meridiem = 'am';
+   if(i > 5) {
+       meridiem = 'pm';
+   }
+   var mod = ((22 + i) % 12) + 2; 
+   if(mod === 13) {
+       mod = 1;
+   }
 
-           // Creates random number of cookies sold each hour and stores all 15 results in array
-           num4 = Math.floor(Math.random() * 10) * Math.ceil(this.avgSale);
-           
-           myArr4.push(num4);
-           console.log(myArr4);
+   var itemEl = document.createElement('li');
+   itemEl.textContent = mod + meridiem + ' : ' + this.cookiesSoldPerHr[i] + ' cookies';
+   listEl.appendChild(itemEl);
 
-           // Add the item text
-           var meridiem = 'am';
-           if(i > 4) {
-               meridiem = 'pm';
-           }
-           var mod = (18 + i) % 12; 
-           var line = mod + meridiem + ' : ' + myArr4[i] + ' cookies';
-           // list.innerHTML = myArr4[i];
+   total = total + this.cookiesSoldPerHr[i];
+   console.log(total);
+}   
+   this.cookiesSoldPerHr.push(total);
+   itemEl.textContent = 'Total: ' + total + ' cookies';
+   listEl.appendChild(itemEl);
+   listContainer.appendChild(listEl); //Append ul to div
+};
 
-           // Placing contents:
-           item.innerHTML = line;
+capHill.renderHours();
 
-
-           //var newText = document.createTextNode(line);
-           listEl.appendChild(item);
-
-        } return myArr4;
-    },
-}
-
-capHill.cookPerHr();
 
 var alki = {
-    minCust: 2,
-    maxCust: 16,
-    avgSale: 4.6,
+    name: 'Alki',
+    minCust: 20,
+    maxCust: 38,
+    avgSale: 2.3,
+    cookiesSoldPerHr: [],
+};
+alki.calcCustPerHr = function() {
+   var randPerHr = Math.floor(Math.random() * (this.maxCust - this.minCust + 1) + this.minCust);
+   return Math.floor(Math.random() * (this.maxCust - this.minCust + 1) + this.minCust) * Math.ceil(this.avgSale); 
+   
+};
 
-    cookPerHr: function() {
-           //Create list element
-        var listContainer = document.createElement('div');
-        document.getElementsByTagName('body')[0].appendChild(listContainer);
+alki.calcCookiesPerHr = function() {
+   console.log(this);
+   for(var i = 0; i < 16; i++) {  
+   this.cookiesSoldPerHr.push(this.calcCustPerHr());
+   }
+};
 
-        // var header = document.createElement('h6');   // Create a <h2> element
-        // header.appendChild(document.createTextNode('Alki'));
-        // var text = document.createTextNode("Alki");     // Create a text node
-        // header.appendChild(text);   // Append the text to <h2>
+alki.renderHours = function() {
+   this.calcCookiesPerHr();
 
-        var listEl = document.createElement('ul');
-        document.getElementsByTagName('ul')[0].appendChild(listEl);
+   //Reference containing element
+   var listContainer = document.getElementById('sales-list');
+   //console.log(listContainer);
+   //Creating new element 
+   var headEl = document.createElement('h3');
+   headEl.textContent = this.name;
+   //Appending child element to parent
+   listContainer.appendChild(headEl);
 
-        listContainer.appendChild(listEl);
+   var listEl = document.createElement('ul');
 
-        var myArr5 = [];
+   var total = 0;
 
-        for(var i = 0; i < 15; i++) {
-            // Creates the list item:
-            var item = document.createElement('li');
+   for(var i in this.cookiesSoldPerHr) {
+   console.log(this.cookiesSoldPerHr);
+   // Add the items' text for store hours
+   var meridiem = 'am';
+   if(i > 5) {
+       meridiem = 'pm';
+   }
+   var mod = ((22 + i) % 12) + 2; 
+   if(mod === 13) {
+       mod = 1;
+   }
 
-            // Creates random number of cookies sold each hour and stores all 15 results in array
-            num5 = Math.floor(Math.random() * 10) * Math.ceil(this.avgSale);
-            
-            myArr5.push(num5);
-            console.log(myArr5);
+   var itemEl = document.createElement('li');
+   itemEl.textContent = mod + meridiem + ' : ' + this.cookiesSoldPerHr[i] + ' cookies';
+   listEl.appendChild(itemEl);
 
-            // Add the item text
-            var meridiem = 'am';
-            if(i > 4) {
-                meridiem = 'pm';
-            }
-            var mod = (18 + i) % 12; 
-            var line = mod + meridiem + ' : ' + myArr5[i] + ' cookies';
-            // list.innerHTML = myArr1[i];
+   total = total + this.cookiesSoldPerHr[i];
+   console.log(total);
+}   
+   this.cookiesSoldPerHr.push(total);
+   itemEl.textContent = 'Total: ' + total + ' cookies';
+   listEl.appendChild(itemEl);
+   listContainer.appendChild(listEl); //Append ul to div
+};
 
-            // Placing contents:
-            item.innerHTML = line;
+alki.renderHours();
 
-
-            //var newText = document.createTextNode(line);
-            listEl.appendChild(item);
-
-        } return myArr5;
-    },
-}
-
-alki.cookPerHr();
 
