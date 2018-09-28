@@ -50,7 +50,7 @@ var pikePlace = {
         itemEl.textContent = mod + meridiem + ' : ' + this.cookiesSoldPerHr[i] + ' cookies';
         listEl.appendChild(itemEl);
 
-        total = total + this.cookiesSoldPerHr[i];
+        total += this.cookiesSoldPerHr[i];
         console.log(total);
     }   
         this.cookiesSoldPerHr.push(total);
@@ -114,7 +114,7 @@ seaTac.renderHours = function() {
    itemEl.textContent = mod + meridiem + ' : ' + this.cookiesSoldPerHr[i] + ' cookies';
    listEl.appendChild(itemEl);
 
-   total = total + this.cookiesSoldPerHr[i];
+   total += this.cookiesSoldPerHr[i];
    console.log(total);
 }   
    this.cookiesSoldPerHr.push(total);
@@ -178,7 +178,7 @@ seaCent.renderHours = function() {
    itemEl.textContent = mod + meridiem + ' : ' + this.cookiesSoldPerHr[i] + ' cookies';
    listEl.appendChild(itemEl);
 
-   total = total + this.cookiesSoldPerHr[i];
+   total += this.cookiesSoldPerHr[i];
    console.log(total);
 }   
    this.cookiesSoldPerHr.push(total);
@@ -242,7 +242,7 @@ capHill.renderHours = function() {
    itemEl.textContent = mod + meridiem + ' : ' + this.cookiesSoldPerHr[i] + ' cookies';
    listEl.appendChild(itemEl);
 
-   total = total + this.cookiesSoldPerHr[i];
+   total += this.cookiesSoldPerHr[i];
    console.log(total);
 }   
    this.cookiesSoldPerHr.push(total);
@@ -306,7 +306,7 @@ alki.renderHours = function() {
    itemEl.textContent = mod + meridiem + ' : ' + this.cookiesSoldPerHr[i] + ' cookies';
    listEl.appendChild(itemEl);
 
-   total = total + this.cookiesSoldPerHr[i];
+   total += this.cookiesSoldPerHr[i];
    console.log(total);
 }   
    this.cookiesSoldPerHr.push(total);

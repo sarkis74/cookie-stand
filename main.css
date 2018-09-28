@@ -1,4 +1,26 @@
-body {
-    color: rgb(26, 17, 17);
-    background-color: azure;
+
+@keyframes example {
+    0%   {background-color: beige;}
+    25%  {background-color: rgb(194, 236, 190);}
+    50%  {background-color: rgb(0, 140, 255);}
+    100% {background-color: rgb(98, 132, 138);}
 }
+
+body {
+    width: 300px;
+    height: 300px;
+    background-color:lightblue;
+    animation-name: example;
+    animation-duration: 45s;
+} 
+
+img:hover {
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+
+p {
+    font-weight:400;
+    background-color: rgb(36, 28, 18);
+    color: white;
+} 
