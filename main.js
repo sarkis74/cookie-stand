@@ -5,6 +5,7 @@ var cookieStore = function(name, minCust, maxCust, avgSale) {
     this.avgSale = avgSale;
     this.cookiesSoldPerHour = [];
     this.storesTimes = ['6am','7am','8am','9am','10am','11am','12pm','1pm','2pm','3pm','4pm','5pm','6pm','7pm','8pm','Daily Location Total'];
+    this.salesForAll = [];
 };
   
     cookieStore.prototype.calcCustPerHour = function() { //This proto is to generate random sales qty
@@ -61,6 +62,7 @@ var cookieStore = function(name, minCust, maxCust, avgSale) {
         var tabContainer = document.getElementById('sales-list');
         tabContainer.appendChild(tableEl);
         console.log(tableEl);
+        //this.salesFooter();
     };
 
     cookieStore.prototype.salesHeader = function() {
@@ -81,20 +83,53 @@ var cookieStore = function(name, minCust, maxCust, avgSale) {
         var tabDataEl = document.createElement('td');
         tabDataEl.textContent = this.storesTimes[i];
         tabDataEl.style.fontWeight = "900";
-        
         tabRowEl.appendChild(tabDataEl);
-        
         tableEl.appendChild(tabRowEl);
         var rowCount = document.getElementById('cookies-table').rows.length;
+
         if(rowCount > 1) {
         document.getElementById("cookies-table").deleteRow(rowCount - 1); 
-        }
+            }
         } 
         console.log(rowCount);
         var tabContainer = document.getElementById('sales-list');
         tabContainer.appendChild(tableEl);
         console.log(tableEl);
     };
+
+    // cookieStore.prototype.salesFooter = function() {
+    //     var tableEl = document.getElementById('cookies-table');
+    //     tableEl.style.border="2px solid black";
+    //     var tabRowEl = document.createElement('tr');
+    //     var tabHeadEl = document.createElement('th');
+    //     tabHeadEl.textContent = 'Total';
+    //     console.log(tabHeadEl);
+    //     tabRowEl.appendChild(tabHeadEl);
+    //     tableEl.appendChild(tabRowEl);
+            
+    //     for(var row = 0; row < this.cookiesSoldPerHour[row]; row++) {
+    //         var counter = cookiesSoldPerHour[row];
+    //         }
+    //             var sum = 1;
+    //             for(col = 0; col < sum; col++) {
+    //     }
+    //     sum += counter;
+    //     var tabDataEl = document.createElement('td');
+    //     tabDataEl.textContent = sum;
+    //     tabDataEl.style.fontWeight = "900";
+    //     tabRowEl.appendChild(tabDataEl);
+    //     tableEl.appendChild(tabRowEl);
+    //     var rowCount = document.getElementById('cookies-table').rows.length;
+
+    //     // if(rowCount > 1) {
+    //     // document.getElementById("cookies-table").deleteRow(rowCount - 1); 
+    //     //     }
+    //     } 
+        
+    //     var tabContainer = document.getElementById('sales-list');
+    //     tabContainer.appendChild(tableEl);
+    //     console.log(tableEl);
+
 
     
 var pikePlace = new cookieStore('1st and Pike', 23, 65, 6.3);
@@ -108,3 +143,9 @@ seaTac.renderSales();
 seaCent.renderSales();
 capHill.renderSales();
 alki.renderSales();
+
+// pikePlace.salesFooter();
+// seaTac.salesFooter();
+// seaCent.salesFooter();
+// capHill.renderSales();
+// alki.renderSales();
