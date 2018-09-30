@@ -1,3 +1,11 @@
+//Reference for html elements
+
+var tableEl = document.getElementById('cookies-table');
+var tabRowEl = document.createElement('tr');
+var tabHeadEl = document.createElement('th');
+var tabDataEl = document.createElement('td');
+var rowCount = document.getElementById('cookies-table').rows.length;
+
 var allStores = [];
 var storesTimes = [];
 
@@ -10,13 +18,6 @@ var cookieStore = function(name, minCust, maxCust, avgSale) {
     this.storesTimes = ['6am','7am','8am','9am','10am','11am','12pm','1pm','2pm','3pm','4pm','5pm','6pm','7pm','8pm','Daily Location Total'];
     this.allStores = [pikePlace, seaTac, seaCent, capHill, alki];
 };
-    //Reference for html elements
-
-    var tableEl = document.getElementById('cookies-table');
-    var tabRowEl = document.createElement('tr');
-    var tabHeadEl = document.createElement('th');
-    var tabDataEl = document.createElement('td');
-    var rowCount = document.getElementById('cookies-table').rows.length;
     
     cookieStore.prototype.calcCustPerHour = function() { //This proto is to generate random sales qty
         var randomAmount = Math.floor(Math.random() * (this.max - this.min + 1) + this.min);
@@ -30,8 +31,9 @@ var cookieStore = function(name, minCust, maxCust, avgSale) {
         cookieSales.push(this.cookiesSoldPerHour[i])
         total += this.cookiesSoldPerHour[i];
         } 
-        //cookieSales.push(total);
         this.cookiesSoldPerHour.push(total);
+        cookieSales.push(total);
+        console.log(cookieSales);
     };
     
     cookieStore.prototype.renderHours = function() { //This proto is to fetch store hrs/sales and avoid duplicate data
@@ -114,14 +116,14 @@ var cookieStore = function(name, minCust, maxCust, avgSale) {
         tableEl.appendChild(tabRowEl);
         
         var sumTotal = [];
-        var arrLength = storesTimes.length;
+        var arrLength = storesTimes.length + 1;
         var sumTotalSize = arrLength;
     
-        cookieSales.forEach((item)=>{
-        if(!sumTotal.length || sumTotal[sumTotal.length-1].length == sumTotalSize)
-        sumTotal.push([]);
+        cookieSales.forEach((item)=>{ //Iterating through array items
+        if(!sumTotal.length || sumTotal[sumTotal.length-1].length == sumTotalSize) //Conditional to set limit to mumber of table columns 
+        sumTotal.push([]); // Pushes array items to new smaller arrays
 
-        sumTotal[sumTotal.length-1].push(item);
+        sumTotal[sumTotal.length-1].push(item); //Pushes smaller arrays into same original array
         });
 
         var sum = 0;
