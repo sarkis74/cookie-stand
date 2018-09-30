@@ -29,7 +29,9 @@ var cookieStore = function(name, minCust, maxCust, avgSale) {
         this.cookiesSoldPerHour.push(this.calcCustPerHour());
         cookieSales.push(this.cookiesSoldPerHour[i])
         total += this.cookiesSoldPerHour[i];
-        } this.cookiesSoldPerHour.push(total);
+        } 
+        //cookieSales.push(total);
+        this.cookiesSoldPerHour.push(total);
     };
     
     cookieStore.prototype.renderHours = function() { //This proto is to fetch store hrs/sales and avoid duplicate data
@@ -113,39 +115,36 @@ var cookieStore = function(name, minCust, maxCust, avgSale) {
         
         var sumTotal = [];
         var arrLength = storesTimes.length;
-        sum = 0;
-            for(var i = 0; i <= storesTimes.length; i++) {
-                var tabDataEl = document.createElement('td');
-                sum = cookieSales[i] + cookieSales[i + arrLength];
-                console.log(sum);
-                tabDataEl.textContent = sum;  
-                tabRowEl.appendChild(tabDataEl);
-                for(var j = 0; j < cookieSales.length; j++) {
-                // tabDataEl.textContent = sum;         
+        var sumTotalSize = arrLength;
+    
+        cookieSales.forEach((item)=>{
+        if(!sumTotal.length || sumTotal[sumTotal.length-1].length == sumTotalSize)
+        sumTotal.push([]);
+
+        sumTotal[sumTotal.length-1].push(item);
+        });
+
+        var sum = 0;
+            for(var i = 0; i < arrLength; i++) {
+                sum = 0;
+                    for(var j = 0; j < allStores.length; j++) {
+                    //var tabDataEl = document.createElement('td');
+                    sum += sumTotal[j][i];
+                    console.log(sum);
         }
-        // var tabDataEl = document.createElement('td');
-        // var sum = cookieSales[i] + cookieSales[i + arrLength];
+        var tabDataEl = document.createElement('td');
+        tabDataEl.textContent = sum;  
+        tabRowEl.appendChild(tabDataEl);
         sumTotal.push(sum);
-        console.log(sumTotal);
-        //tabDataEl.textContent = sum;
         
     }
-        //console.log(sumTotal);
-        tabDataEl.style.fontWeight = "900";
-        // tabRowEl.appendChild(tabDataEl);
-        // tableEl.appendChild(tabRowEl);
-        // if(rowCount > 1) {
-        // document.getElementById("cookies-table").deleteRow(rowCount - 1); 
-        //     }
         var tabContainer = document.getElementById('sales-list');
         tabContainer.appendChild(tableEl);
-        //console.log(tableEl);
     };
         
         
     
 var cookieSales = [];
-//console.log(cookieSales);
     
 var pikePlace = new cookieStore('1st and Pike', 23, 65, 6.3);
 var seaTac = new cookieStore('SeaTac', 3, 24, 1.2);
