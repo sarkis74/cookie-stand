@@ -1,11 +1,3 @@
-//Reference for html elements
-
-var tableEl = document.getElementById('cookies-table');
-var tabRowEl = document.createElement('tr');
-var tabHeadEl = document.createElement('th');
-var tabDataEl = document.createElement('td');
-var rowCount = document.getElementById('cookies-table').rows.length;
-
 var allStores = [];
 var storesTimes = [];
 
@@ -100,7 +92,6 @@ var CookieStore = function(name, minCust, maxCust, avgSale) {
     };
 
      var salesFooter = function() {
-        //this.renderHours();
         //Reference containing element: 'table'
         //var tabContainer = document.getElementById('sales-list');
         var tableEl = document.getElementById('cookies-table');
@@ -144,8 +135,6 @@ var CookieStore = function(name, minCust, maxCust, avgSale) {
         tabContainer.appendChild(tableEl);
     };
         
-        
-    
 var cookieSales = [];
     
 var pikePlace = new CookieStore('1st and Pike', 23, 65, 6.3);
@@ -163,13 +152,28 @@ alki.renderSales();
 
 salesFooter();
 
+// var callStoreSales = function(displaySales) {
+//     displaySales.preventDefault();
+//     renderSales();
+// };
 
-var callStoreSales = function(displaySales) {
-    displaySales.preventDefault();
-    renderSales();
+// var storeSalesForm = document.getElementById('store-name');
+// storeSalesForm.addEventListener('submit', callStoreSales);
+
+//var rendersales = new CookieStore.prototype.renderHours('pikePlace');
+//console.log(rendersales);
+
+
+function userSalesQuery() {
+   
+    var storeName = document.forms["store-generator-form"]["insert name here"].value;
+    for(var i =0; i < allStores.length; i++) {
+        if(storeName === allStore[i]) {
+            var userInput = storeName + ".renderSales";
+            document.forms["store-generator-form"]["insert name here"].value = userInput;
+        } 
+    }
 };
+    console.log(userSalesQuery);
 
-var storeSalesForm = document.getElementById('store-name');
-
-storeSalesForm.addEventListener('submit', callStoreSales);
 
