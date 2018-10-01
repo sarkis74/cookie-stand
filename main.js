@@ -1,136 +1,175 @@
-var firstPike = {
-    minCust: 23,
-    maxCust: 65,
-    avgSale: 6.3,
+//Reference for html elements
 
-    cookPerHr: function() {
-        var list = document.createElement('ul');//Create list element
+var tableEl = document.getElementById('cookies-table');
+var tabRowEl = document.createElement('tr');
+var tabHeadEl = document.createElement('th');
+var tabDataEl = document.createElement('td');
+var rowCount = document.getElementById('cookies-table').rows.length;
 
-        for(var i = 0; i < 15; i++) {
-            // Create the list item:
-            var item = document.createElement('li');
+var allStores = [];
+var storesTimes = [];
 
-            num1 = Math.floor(Math.random() * 10) * Math.ceil(this.avgSale);
-            return num1;
-            myArr1 = [];
-            myArr1.push(num1)
-
-            // Placing contents:
-            item.appendChild(document.createTextNode((18 + i - 12) + ' am: ' + myArr1[i] + ' cookies'));
-
-            // Add it to list:
-            list.appendChild(item);
-        }
-    },
-}
-
-firstPike.cookPerHr();
-
-
-var seaTac = {
-    minCust: 3,
-    maxCust: 24,
-    avgSale: 1.2,
-
-    cookPerHr: function() {
-        var list = document.createElement('ul');//Create list element
-
-        for(var i = 0; i < 15; i++) {
-            // Create the list item:
-            var item = document.createElement('li');
-
-            num2 = Math.floor(Math.random() * 10) * Math.ceil(this.avgSale);
-            return num2;
-            myArr2 = [];
-            myArr2.push(num2)
-
-            // Placing contents:
-            item.appendChild(document.createTextNode((18 + i - 12) + ' am: ' + myArr2[i] + ' cookies'));
-
-            // Add it to list:
-            list.appendChild(item);
-        }
-    },
-}
-
+var CookieStore = function(name, minCust, maxCust, avgSale) {
+    this.name = name;
+    this.min = minCust;
+    this.max = maxCust;
+    this.avgSale = avgSale;
+    this.cookiesSoldPerHour = [];
+    this.storesTimes = ['6am','7am','8am','9am','10am','11am','12pm','1pm','2pm','3pm','4pm','5pm','6pm','7pm','8pm','Daily Location Total'];
+    this.allStores = [pikePlace, seaTac, seaCent, capHill, alki];
+};
     
+    CookieStore.prototype.calcCustPerHour = function() { //This proto is to generate random sales qty
+        var randomAmount = Math.floor(Math.random() * (this.max - this.min + 1) + this.min);
+        return Math.round(randomAmount * this.avgSale);
+    };
 
+    CookieStore.prototype.calculateCookiesPerHour = function() { //This proto is to call previous proto and store values in array
+        var total = 0;
+        for(var i = 0; i < 15; i++) {  
+        this.cookiesSoldPerHour.push(this.calcCustPerHour());
+        cookieSales.push(this.cookiesSoldPerHour[i])
+        total += this.cookiesSoldPerHour[i];
+        } 
+        this.cookiesSoldPerHour.push(total);
+        cookieSales.push(total);
+        console.log(cookieSales);
+    };
+    
+    CookieStore.prototype.renderHours = function() { //This proto is to fetch store hrs/sales and avoid duplicate data
+        this.calculateCookiesPerHour();
+        if(!this.cookiesSoldPerHour.length){ //Avoiding duplicate array items
+        this.calculateCookiesPerHour(); //Placing cookies sold each our array
+            }
+        }; 
+        
+    CookieStore.prototype.renderSales = function() {
+        this.renderHours();
+        this.salesHeader();
+        var tableEl = document.getElementById('cookies-table');
+        tableEl.style.border="2px solid black";
+        var tabRowEl = document.createElement('tr');
+        var tabHeadEl = document.createElement('th');
+        tabHeadEl.textContent = this.name;
+        tabRowEl.appendChild(tabHeadEl);
+        tableEl.appendChild(tabRowEl);
 
-var seaCent = {
-    minCust: 11,
-    maxCust: 38,
-    avgSale: 3.7,
+            for(var i = 0; i < 16; i++) {
+        tabRowEl.style.borderBottom = "thick solid #0000FF"; 
+        var tabDataEl = document.createElement('td');
+        //Create table-data cells and fill with store values
+        tabDataEl.style.border = "1px solid black";
+        tabDataEl.textContent = this.cookiesSoldPerHour[i];
+        tabDataEl.style.fontSize = "18";
+        //Appending child 'table-data' to parent 'table-row'
+        tabRowEl.appendChild(tabDataEl);
+        //Appending child 'table-row' to parent 'table'
+        tableEl.appendChild(tabRowEl);
+        } 
+        var tabContainer = document.getElementById('sales-list');
+        tabContainer.appendChild(tableEl);
+        //this.salesFooter();
+    };
 
-    cookPerHr: function() {
-        var list = document.createElement('ul');//Create list element
+    CookieStore.prototype.salesHeader = function() {
+        var tableEl = document.getElementById('cookies-table');
+        tableEl.style.border="2px solid black";
+        var tabRowEl = document.createElement('tr');
+        var tabHeadEl = document.createElement('th');
+        tabHeadEl.textContent = '';
+        //Appending child 'table-header' to parent 'table-row'
+        tabRowEl.appendChild(tabHeadEl);
+        //Appending child 'table-row' to parent 'table'
+        tableEl.appendChild(tabRowEl);
 
-        for(var i = 0; i < 15; i++) {
-            // Create the list item:
-            var item = document.createElement('li');
+        for(var i = 0; i < this.storesTimes.length; i++) {
+        
+        var tabDataEl = document.createElement('td');
+        tabDataEl.textContent = this.storesTimes[i];
+        tabDataEl.style.fontWeight = "900";
+        tabRowEl.appendChild(tabDataEl);
+        tableEl.appendChild(tabRowEl);
+        var rowCount = document.getElementById('cookies-table').rows.length;
 
-            num3 = Math.floor(Math.random() * 10) * Math.ceil(this.avgSale);
-            return num3;
-            myArr3 = [];
-            myArr3.push(num3)
+        if(rowCount > 1) {
+        document.getElementById("cookies-table").deleteRow(rowCount - 1); 
+            }
+        } 
+        var tabContainer = document.getElementById('sales-list');
+        tabContainer.appendChild(tableEl);
+    };
 
-            // Placing contents:
-            item.appendChild(document.createTextNode((18 + i - 12) + ' am: ' + myArr3[i] + ' cookies'));
+     var salesFooter = function() {
+        //this.renderHours();
+        //Reference containing element: 'table'
+        //var tabContainer = document.getElementById('sales-list');
+        var tableEl = document.getElementById('cookies-table');
+        tableEl.style.border="2px solid black";
+        //Creating new elements (table: row, headers)
+        var tabRowEl = document.createElement('tr');
+        var tabHeadEl = document.createElement('th');
+        tabHeadEl.textContent = 'Total';
+        //console.log(tabHeadEl);
+        //Appending child 'table-header' to parent 'table-row'
+        tabRowEl.appendChild(tabHeadEl);
+        //Appending child 'table-row' to parent 'table'
+        tableEl.appendChild(tabRowEl);
+        
+        var sumTotal = [];
+        var arrLength = storesTimes.length + 1;
+        var sumTotalSize = arrLength;
+    
+        cookieSales.forEach((item)=>{ //Iterating through array items
+        if(!sumTotal.length || sumTotal[sumTotal.length-1].length == sumTotalSize) //Conditional to set limit to mumber of table columns 
+        sumTotal.push([]); // Pushes array items to new smaller arrays
 
-            // Add it to list:
-            list.appendChild(item);
+        sumTotal[sumTotal.length-1].push(item); //Pushes smaller arrays into same original array
+        });
+
+        var sum = 0;
+            for(var i = 0; i < arrLength; i++) {
+                sum = 0;
+                    for(var j = 0; j < allStores.length; j++) {
+                    //var tabDataEl = document.createElement('td');
+                    sum += sumTotal[j][i];
+                    console.log(sum);
         }
-    },
-}
+        var tabDataEl = document.createElement('td');
+        tabDataEl.textContent = sum;  
+        tabRowEl.appendChild(tabDataEl);
+        sumTotal.push(sum);
+        
+    }
+        var tabContainer = document.getElementById('sales-list');
+        tabContainer.appendChild(tableEl);
+    };
+        
+        
+    
+var cookieSales = [];
+    
+var pikePlace = new CookieStore('1st and Pike', 23, 65, 6.3);
+var seaTac = new CookieStore('SeaTac', 3, 24, 1.2);
+var seaCent = new CookieStore('Seattle Center', 11, 38, 3.7);
+var capHill = new CookieStore('Capitol Hill', 20, 38, 2.3);
+var alki = new CookieStore('Alki', 2, 16, 4.6);
+allStores = [pikePlace, seaTac,seaCent, capHill, alki];
+storesTimes = ['6am','7am','8am','9am','10am','11am','12pm','1pm','2pm','3pm','4pm','5pm','6pm','7pm','8pm'];
+pikePlace.renderSales();
+seaTac.renderSales();
+seaCent.renderSales();
+capHill.renderSales();
+alki.renderSales();
+
+salesFooter();
 
 
-var capHill = {
-    minCust: 20,
-    maxCust: 38,
-    avgSale: 2.3,
+var callStoreSales = function(displaySales) {
+    displaySales.preventDefault();
+    renderSales();
+};
 
-    cookPerHr: function() {
-        var list = document.createElement('ul');//Create list element
+var storeSalesForm = document.getElementById('store-name');
 
-        for(var i = 0; i < 15; i++) {
-            // Create the list item:
-            var item = document.createElement('li');
+storeSalesForm.addEventListener('submit', callStoreSales);
 
-            num4 = Math.floor(Math.random() * 10) * Math.ceil(this.avgSale);
-            return num4;
-            myArr4 = [];
-            myArr4.push(num4)
-
-            // Placing contents:
-            item.appendChild(document.createTextNode((18 + i - 12) + ' am: ' + myArr4[i] + ' cookies'));
-
-            // Add it to list:
-            list.appendChild(item);
-        }
-    },
-}
-
-
-var alki = {
-    minCust: 2,
-    maxCust: 16,
-    avgSale: 4.6,
-
-    cookPerHr: function() {
-        var list = document.createElement('ul');//Create list element
-
-        for(var i = 0; i < 15; i++) {
-            // Create the list item:
-            var item = document.createElement('li');
-
-            num5 = Math.floor(Math.random() * 10) * Math.ceil(this.avgSale);
-            return num5;
-            myArr5 = [];
-            myArr5.push(num5)
-
-            //Placing contents:
-            item.appendChild(document.createTextNode((18 + i - 12) + ' am: ' + myArr5[i] + ' cookies'));
-            // Add to the list:
-            list.appendChild(item);
-        }
-    },
-}

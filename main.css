@@ -1,0 +1,45 @@
+
+@keyframes example {
+    0%   {background-color: beige;}
+    25%  {background-color: rgb(194, 236, 190);}
+    50%  {background-color: rgb(0, 140, 255);}
+    100% {background-color: rgb(98, 132, 138);}
+}
+
+body {
+    width: 900px;
+    height: 900px;
+    background-color:lightblue;
+    animation-name: example;
+    animation-duration: 45s;
+} 
+
+img:hover {
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+
+p {
+    font-weight:400;
+    background-color: rgb(36, 28, 18);
+    color: white;
+    padding-left: 50px;
+} 
+
+#cookies-table {
+    border: rgb(36, 28, 18);
+}
+
+tr:nth-child(odd) {background: #CCC}
+tr:nth-child(even) {background: #FFF}
+
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+} 
