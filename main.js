@@ -152,16 +152,16 @@ alki.renderSales();
 
 salesFooter();
 
-// var callStoreSales = function(displaySales) {
-//     displaySales.preventDefault();
-//     renderSales();
-// };
+var callStoreSales = function(displaySales) {
+    displaySales.preventDefault();
+    renderSales();
+};
 
-// var storeSalesForm = document.getElementById('store-name');
-// storeSalesForm.addEventListener('submit', callStoreSales);
+var storeSalesForm = document.getElementById('store-name');
+storeSalesForm.addEventListener('submit', callStoreSales);
 
-//var rendersales = new CookieStore.prototype.renderHours('pikePlace');
-//console.log(rendersales);
+var rendersales = new CookieStore.prototype.renderHours('pikePlace');
+console.log(rendersales);
 
 
 function userSalesQuery() {
