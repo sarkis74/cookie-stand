@@ -1,3 +1,8 @@
+//1. reference a containing element - document.getElementById()
+//2. Create a new element - document.createElement()
+//3. Give that element content - element.textContent
+//4. append that element to the containing element parentElement.appendChild(newChildElement)
+
 var allStores = [];
 var storesTimes = [];
 
@@ -19,18 +24,18 @@ var CookieStore = function(name, minCust, maxCust, avgSale) {
     CookieStore.prototype.calculateCookiesPerHour = function() { //This proto is to call previous proto and store values in array
         var total = 0;
         for(var i = 0; i < 15; i++) {  
-        this.cookiesSoldPerHour.push(this.calcCustPerHour());
-        cookieSales.push(this.cookiesSoldPerHour[i])
-        total += this.cookiesSoldPerHour[i];
-        } 
+            this.cookiesSoldPerHour.push(this.calcCustPerHour());
+            cookieSales.push(this.cookiesSoldPerHour[i])
+            total += this.cookiesSoldPerHour[i];
+            } 
         this.cookiesSoldPerHour.push(total);
         cookieSales.push(total);
     };
     
     CookieStore.prototype.renderHours = function() { //This proto is to fetch store hrs/sales and avoid duplicate data
         this.calculateCookiesPerHour();
-        if(!this.cookiesSoldPerHour.length){ //Avoiding duplicate array items
-        this.calculateCookiesPerHour(); //Placing cookies sold each our array
+            if(!this.cookiesSoldPerHour.length){ //Avoiding duplicate array items
+                this.calculateCookiesPerHour(); //Placing cookies sold each our array
             }
         }; 
         
@@ -46,20 +51,19 @@ var CookieStore = function(name, minCust, maxCust, avgSale) {
         tableEl.appendChild(tabRowEl);
 
             for(var i = 0; i < 16; i++) {
-        tabRowEl.style.borderBottom = "thick solid #0000FF"; 
-        var tabDataEl = document.createElement('td');
-        //Create table-data cells and fill with store values
-        tabDataEl.style.border = "1px solid black";
-        tabDataEl.textContent = this.cookiesSoldPerHour[i];
-        tabDataEl.style.fontSize = "18";
-        //Appending child 'table-data' to parent 'table-row'
-        tabRowEl.appendChild(tabDataEl);
-        //Appending child 'table-row' to parent 'table'
-        tableEl.appendChild(tabRowEl);
+                tabRowEl.style.borderBottom = "thick solid #0000FF"; 
+                var tabDataEl = document.createElement('td');
+                //Create table-data cells and fill with store values
+                tabDataEl.style.border = "1px solid black";
+                tabDataEl.textContent = this.cookiesSoldPerHour[i];
+                tabDataEl.style.fontSize = "18";
+                //Appending child 'table-data' to parent 'table-row'
+                tabRowEl.appendChild(tabDataEl);
+                //Appending child 'table-row' to parent 'table'
+                tableEl.appendChild(tabRowEl);
         } 
         var tabContainer = document.getElementById('sales-list');
         tabContainer.appendChild(tableEl);
-        //this.salesFooter();
     };
 
     CookieStore.prototype.salesHeader = function() {
@@ -73,19 +77,19 @@ var CookieStore = function(name, minCust, maxCust, avgSale) {
         //Appending child 'table-row' to parent 'table'
         tableEl.appendChild(tabRowEl);
 
-        for(var i = 0; i < this.storesTimes.length; i++) {
+            for(var i = 0; i < this.storesTimes.length; i++) {
         
-        var tabDataEl = document.createElement('td');
-        tabDataEl.textContent = this.storesTimes[i];
-        tabDataEl.style.fontWeight = "900";
-        tabRowEl.appendChild(tabDataEl);
-        tableEl.appendChild(tabRowEl);
-        var rowCount = document.getElementById('cookies-table').rows.length;
+                var tabDataEl = document.createElement('td');
+                tabDataEl.textContent = this.storesTimes[i];
+                tabDataEl.style.fontWeight = "900";
+                tabRowEl.appendChild(tabDataEl);
+                tableEl.appendChild(tabRowEl);
+                var rowCount = document.getElementById('cookies-table').rows.length;
 
-        if(rowCount > 1) {
-        document.getElementById("cookies-table").deleteRow(rowCount - 1); 
-            }
-        } 
+                if(rowCount > 1) {
+                    document.getElementById("cookies-table").deleteRow(rowCount - 1); 
+                    }
+            } 
         var tabContainer = document.getElementById('sales-list');
         tabContainer.appendChild(tableEl);
     };
@@ -105,23 +109,23 @@ var CookieStore = function(name, minCust, maxCust, avgSale) {
         //Appending child 'table-row' to parent 'table'
         tableEl.appendChild(tabRowEl);
         
-        var sumTotal = [];
+        //var sumTotal = [];
         var arrLength = storesTimes.length + 1;
         var sumTotalSize = arrLength;
     
         cookieSales.forEach((item)=>{ //Iterating through array items
-        if(!sumTotal.length || sumTotal[sumTotal.length-1].length == sumTotalSize) //Conditional to set limit to mumber of table columns 
-        sumTotal.push([]); // Pushes array items to new smaller arrays
+            if(!sumTotal.length || sumTotal[sumTotal.length-1].length == sumTotalSize) //Conditional to set limit to mumber of table columns 
+                sumTotal.push([]); // Pushes array items to new smaller arrays
 
-        sumTotal[sumTotal.length-1].push(item); //Pushes smaller arrays into same original array
-        });
+                sumTotal[sumTotal.length-1].push(item); //Pushes smaller arrays into same original array
+                });
 
         var sum = 0;
-            for(var i = 0; i < arrLength; i++) {
+            for(var i = 0; i < arrLength; i++) { //Containing array with i as columns
                 sum = 0;
-                    for(var j = 0; j < allStores.length; j++) {
+                    for(var j = 0; j < allStores.length; j++) { //Contained arrays with j as rows
                     //var tabDataEl = document.createElement('td');
-                    sum += sumTotal[j][i];
+                    sum += sumTotal[j][i]; //Indices captures [r][c] item
                    
         }
         var tabDataEl = document.createElement('td');
@@ -135,6 +139,7 @@ var CookieStore = function(name, minCust, maxCust, avgSale) {
     };
         
 var cookieSales = [];
+var sumTotal = [];
     
 var pikePlace = new CookieStore('1st and Pike', 23, 65, 6.3);
 var seaTac = new CookieStore('SeaTac', 3, 24, 1.2);
@@ -147,59 +152,33 @@ storesTimes = ['6am','7am','8am','9am','10am','11am','12pm','1pm','2pm','3pm','4
 //===================================
 //Write function to render all stores
 var renderAllStores = function() {
-// for(var i in allStores) {
-//     allStores[i].renderSales;
-// }
-pikePlace.renderSales();
-seaTac.renderSales();
-seaCent.renderSales();
-capHill.renderSales();
-alki.renderSales();
+    for(var i in allStores) {
+        allStores[i].renderSales();
+    }
 salesFooter();
 };
 
 renderAllStores();
-console.log(renderAllStores);
+console.log(sumTotal);
 
 // This is the event handler, 4 arguments are required of user
-var handlerStoreCreate = function(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    var storeName = event.target['store-name'].value;
-    var maxiCust = event.target['maximum-customers'].value;
-    var miniCust = event.target['minimum-customers'].value;
-    var averageSales = event.target['average-sales'].value;
+var handlerStoreCreate = function(eventShowSales) {
+    eventShowSales.preventDefault();
+    eventShowSales.stopPropagation();
+    var storeName = eventShowSales.target['store-name'].value;
+    var maxiCust = eventShowSales.target['maximum-customers'].value;
+    var miniCust = eventShowSales.target['minimum-customers'].value;
+    var averageSales = eventShowSales.target['average-sales'].value;
     var NewStore = new CookieStore(storeName,miniCust,maxiCust,averageSales);
-    console.log(NewStore);
     allStores.push(NewStore);
+    allStores.splice(0,5);
+    renderAllStores();
+    // sumTotal.splice(5, 15);
+    // salesFooter();
+    console.log(renderAllStores);
 };
 
 var salesForm = document.getElementById('store-generator-form');
 salesForm.addEventListener('submit', handlerStoreCreate);
-
-// console.log(allStores);
-// var lastItem = allStores.length - 1;
-//     for(var i in allStores) {
-//         var makeStore = allStores[lastItem];
-//         if(i > 4) {
-//             makeStore.renderSales();
-//         }
-//     }
-
-// console.log(makeStore);
-
-//renderAllStores();
-
-// function userSalesQuery() {
-   
-//     var storeName = document.forms["store-generator-form"]["insert name here"].value;
-//     for(var i =0; i < allStores.length; i++) {
-//         if(storeName === allStore[i]) {
-//             var userInput = storeName + ".renderSales";
-//             document.forms["store-generator-form"]["insert name here"].value = userInput;
-//         } 
-//     }
-// };
-//     console.log(userSalesQuery);
 
 
