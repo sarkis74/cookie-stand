@@ -28,18 +28,14 @@ p {
 
 #cookies-table {
     border: rgb(36, 28, 18);
+    border-collapse: collapse;
 }
 
 tr:nth-child(odd) {background: #CCC}
 tr:nth-child(even) {background: #FFF}
 
-.button {
-    background-color: #4CAF50; /* Green */
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
+label {
     display: inline-block;
-    font-size: 16px;
-} 
+    width: 800px;
+    text-align: left;
+}

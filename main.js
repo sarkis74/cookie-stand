@@ -25,7 +25,6 @@ var CookieStore = function(name, minCust, maxCust, avgSale) {
         } 
         this.cookiesSoldPerHour.push(total);
         cookieSales.push(total);
-        console.log(cookieSales);
     };
     
     CookieStore.prototype.renderHours = function() { //This proto is to fetch store hrs/sales and avoid duplicate data
@@ -123,7 +122,7 @@ var CookieStore = function(name, minCust, maxCust, avgSale) {
                     for(var j = 0; j < allStores.length; j++) {
                     //var tabDataEl = document.createElement('td');
                     sum += sumTotal[j][i];
-                    console.log(sum);
+                   
         }
         var tabDataEl = document.createElement('td');
         tabDataEl.textContent = sum;  
@@ -144,36 +143,63 @@ var capHill = new CookieStore('Capitol Hill', 20, 38, 2.3);
 var alki = new CookieStore('Alki', 2, 16, 4.6);
 allStores = [pikePlace, seaTac,seaCent, capHill, alki];
 storesTimes = ['6am','7am','8am','9am','10am','11am','12pm','1pm','2pm','3pm','4pm','5pm','6pm','7pm','8pm'];
+
+//===================================
+//Write function to render all stores
+var renderAllStores = function() {
+// for(var i in allStores) {
+//     allStores[i].renderSales;
+// }
 pikePlace.renderSales();
 seaTac.renderSales();
 seaCent.renderSales();
 capHill.renderSales();
 alki.renderSales();
-
 salesFooter();
-
-var callStoreSales = function(displaySales) {
-    displaySales.preventDefault();
-    renderSales();
 };
 
-var storeSalesForm = document.getElementById('store-name');
-storeSalesForm.addEventListener('submit', callStoreSales);
+renderAllStores();
+console.log(renderAllStores);
 
-var rendersales = new CookieStore.prototype.renderHours('pikePlace');
-console.log(rendersales);
+// This is the event handler, 4 arguments are required of user
+var handlerStoreCreate = function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    var storeName = event.target['store-name'].value;
+    var maxiCust = event.target['maximum-customers'].value;
+    var miniCust = event.target['minimum-customers'].value;
+    var averageSales = event.target['average-sales'].value;
+    var NewStore = new CookieStore(storeName,miniCust,maxiCust,averageSales);
+    console.log(NewStore);
+    allStores.push(NewStore);
+};
 
+var salesForm = document.getElementById('store-generator-form');
+salesForm.addEventListener('submit', handlerStoreCreate);
 
-function userSalesQuery() {
+// console.log(allStores);
+// var lastItem = allStores.length - 1;
+//     for(var i in allStores) {
+//         var makeStore = allStores[lastItem];
+//         if(i > 4) {
+//             makeStore.renderSales();
+//         }
+//     }
+
+// console.log(makeStore);
+
+//renderAllStores();
+
+// function userSalesQuery() {
    
-    var storeName = document.forms["store-generator-form"]["insert name here"].value;
-    for(var i =0; i < allStores.length; i++) {
-        if(storeName === allStore[i]) {
-            var userInput = storeName + ".renderSales";
-            document.forms["store-generator-form"]["insert name here"].value = userInput;
-        } 
-    }
-};
-    console.log(userSalesQuery);
+//     var storeName = document.forms["store-generator-form"]["insert name here"].value;
+//     for(var i =0; i < allStores.length; i++) {
+//         if(storeName === allStore[i]) {
+//             var userInput = storeName + ".renderSales";
+//             document.forms["store-generator-form"]["insert name here"].value = userInput;
+//         } 
+//     }
+// };
+//     console.log(userSalesQuery);
 
 
