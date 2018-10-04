@@ -114,10 +114,9 @@ var CookieStore = function(name, minCust, maxCust, avgSale) {
         var sumTotalSize = arrLength;
         //Nested array to sort original array into columns and rows
         cookieSales.forEach((item)=>{ //Iterating through array items
-            if(!sumTotal.length || sumTotal[sumTotal.length-1].length == sumTotalSize) //Conditional to set limit to mumber of table columns 
-                sumTotal.push([]); // Pushes array items to new smaller arrays
-
-                sumTotal[sumTotal.length-1].push(item); //Pushes smaller arrays into same original array
+            if(!sumTotal.length || sumTotal[sumTotal.length - 1].length === sumTotalSize) //Conditional to set limit to mumber of table columns 
+                sumTotal.push([]); // Pushes smaller arrays into larger array
+                sumTotal[sumTotal.length - 1].push(item); //Pushes array items into small arrays
                 });
 
         var sum = 0;
@@ -159,8 +158,9 @@ var renderAllStores = function() {
 };
 
 renderAllStores();
+
 //sumTotal.splice(5, 16);
-//console.log(sumTotal);
+console.log(cookieSales);
 
 rowsSum = allStores.length;
 //console.log(rowsSum);
@@ -175,12 +175,13 @@ var handlerStoreCreate = function(eventShowSales) {
     var averageSales = eventShowSales.target['average-sales'].value;
     var NewStore = new CookieStore(storeName,miniCust,maxiCust,averageSales);
     allStores.push(NewStore); //Adds new store to stores array
-    allStores.splice(0,5); //This is to avoid duplicate rows
     renderAllStores();
-    sumTotal.push(NewStore);
-    // console.log(sumTotal);
+    cookieSales.splice(0,80); //Splice for deleting duplicate store sales values
+    console.log(cookieSales);
     salesFooter();
-    console.log(sumTotal);
+        for(var i = 1; i < 6; i++) { //Loop is to delete duplicate rows
+        document.getElementById("cookies-table").deleteRow(i); 
+    }
 };
 
 var salesForm = document.getElementById('store-generator-form');
