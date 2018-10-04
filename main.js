@@ -160,7 +160,8 @@ var renderAllStores = function() {
 renderAllStores();
 
 //sumTotal.splice(5, 16);
-console.log(cookieSales);
+console.log(cookieSales.length);
+console.log(allStores.length);
 
 rowsSum = allStores.length;
 //console.log(rowsSum);
@@ -175,11 +176,15 @@ var handlerStoreCreate = function(eventShowSales) {
     var averageSales = eventShowSales.target['average-sales'].value;
     var NewStore = new CookieStore(storeName,miniCust,maxiCust,averageSales);
     allStores.push(NewStore); //Adds new store to stores array
+    console.log(NewStore.cookiesSoldPerHour);
     renderAllStores();
-    cookieSales.splice(0,80); //Splice for deleting duplicate store sales values
-    console.log(cookieSales);
+    //     for(var i = 0; i < cookieSales.length + 1; i++) {
+    //     cookieSales.splice(0, cookieSales.length); //Splice for deleting duplicate store sales values
+    // }
+    cookieSales.splice(0, cookieSales - NewStore.length);
+    console.log(cookieSales.length);
     salesFooter();
-        for(var i = 1; i < 6; i++) { //Loop is to delete duplicate rows
+        for(var i = 1; i < allStores.length; i++) { //Loop is to delete duplicate rows
         document.getElementById("cookies-table").deleteRow(i); 
     }
 };
