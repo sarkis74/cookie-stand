@@ -24,7 +24,7 @@ var CookieStore = function(name, minCust, maxCust, avgSale) {
     CookieStore.prototype.calculateCookiesPerHour = function() { //This proto is to call previous proto and store values in array
         var total = 0;
         for(var i = 0; i < 15; i++) {  
-            this.cookiesSoldPerHour.push(this.calcCustPerHour());
+            this.cookiesSoldPerHour.push(this.calcCustPerHour()); //
             cookieSales.push(this.cookiesSoldPerHour[i])
             total += this.cookiesSoldPerHour[i];
             } 
@@ -112,7 +112,7 @@ var CookieStore = function(name, minCust, maxCust, avgSale) {
         //var sumTotal = [];
         var arrLength = storesTimes.length + 1;
         var sumTotalSize = arrLength;
-    
+        //Nested array to sort original array into columns and rows
         cookieSales.forEach((item)=>{ //Iterating through array items
             if(!sumTotal.length || sumTotal[sumTotal.length-1].length == sumTotalSize) //Conditional to set limit to mumber of table columns 
                 sumTotal.push([]); // Pushes array items to new smaller arrays
@@ -154,31 +154,36 @@ storesTimes = ['6am','7am','8am','9am','10am','11am','12pm','1pm','2pm','3pm','4
 var renderAllStores = function() {
     for(var i in allStores) {
         allStores[i].renderSales();
-    }
-salesFooter();
+    } 
+//salesFooter();
 };
 
 renderAllStores();
-console.log(sumTotal);
+//sumTotal.splice(5, 16);
+//console.log(sumTotal);
+
+rowsSum = allStores.length;
+//console.log(rowsSum);
 
 // This is the event handler, 4 arguments are required of user
 var handlerStoreCreate = function(eventShowSales) {
     eventShowSales.preventDefault();
     eventShowSales.stopPropagation();
     var storeName = eventShowSales.target['store-name'].value;
-    var maxiCust = eventShowSales.target['maximum-customers'].value;
     var miniCust = eventShowSales.target['minimum-customers'].value;
+    var maxiCust = eventShowSales.target['maximum-customers'].value;
     var averageSales = eventShowSales.target['average-sales'].value;
     var NewStore = new CookieStore(storeName,miniCust,maxiCust,averageSales);
-    allStores.push(NewStore);
-    allStores.splice(0,5);
+    allStores.push(NewStore); //Adds new store to stores array
+    allStores.splice(0,5); //This is to avoid duplicate rows
     renderAllStores();
-    // sumTotal.splice(5, 15);
-    // salesFooter();
-    console.log(renderAllStores);
+    sumTotal.push(NewStore);
+    // console.log(sumTotal);
+    salesFooter();
+    console.log(sumTotal);
 };
 
 var salesForm = document.getElementById('store-generator-form');
 salesForm.addEventListener('submit', handlerStoreCreate);
 
-
+    
