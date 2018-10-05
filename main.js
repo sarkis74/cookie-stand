@@ -24,7 +24,7 @@ var CookieStore = function(name, minCust, maxCust, avgSale) {
     CookieStore.prototype.calculateCookiesPerHour = function() { //This proto is to call previous proto and store values in array
         var total = 0;
         for(var i = 0; i < 15; i++) {  
-            this.cookiesSoldPerHour.push(this.calcCustPerHour()); //
+            this.cookiesSoldPerHour.push(this.calcCustPerHour()); 
             cookieSales.push(this.cookiesSoldPerHour[i])
             total += this.cookiesSoldPerHour[i];
             } 
@@ -114,7 +114,7 @@ var CookieStore = function(name, minCust, maxCust, avgSale) {
         //Nested array to sort original array into columns and rows
         cookieSales.forEach((item)=>{ //Iterating through array items
             if(!sumTotal.length || sumTotal[sumTotal.length - 1].length === sumTotalSize) //Conditional to set limit to mumber of table columns 
-                sumTotal.push([]); // Pushes smaller arrays into larger array
+                sumTotal.push([]); //Pushes smaller arrays into larger array
                 sumTotal[sumTotal.length - 1].push(item); //Pushes array items into small arrays
                 });
 
@@ -136,8 +136,8 @@ var CookieStore = function(name, minCust, maxCust, avgSale) {
         tabContainer.appendChild(tableEl);
     };
         
-var cookieSales = [];
-var sumTotal = [];
+var cookieSales = []; //Array for sales data
+var sumTotal = []; //Array for sales data plus total
     
 var pikePlace = new CookieStore('1st and Pike', 23, 65, 6.3);
 var seaTac = new CookieStore('SeaTac', 3, 24, 1.2);
@@ -150,18 +150,16 @@ storesTimes = ['6am','7am','8am','9am','10am','11am','12pm','1pm','2pm','3pm','4
 //===================================
 //Write function to render all stores
 var renderAllStores = function() {
-    for(var i in allStores) {
+    for(var i in allStores) { //For loop runs through array containing stores
         allStores[i].renderSales();
     }
 salesFooter();
 console.log(sumTotal);
-for(var i = 0; i < sumTotal.length; i++) {
-    sumTotal.splice(sumTotal[i > allStores.length])
+for(var i = 0; i < sumTotal.length; i++) { //For loop runs through array containing individual store sales and final total
+    sumTotal.splice(sumTotal[i > allStores.length]) //This is to reset final total after each iteration
     }
 };
-console.log(sumTotal);
 renderAllStores();
-console.log(cookieSales);
 
 //var rowCount = document.getElementById("cookies-table").rows.length;
 // This is the event handler, 4 arguments are required of user
@@ -177,7 +175,7 @@ var handlerStoreCreate = function(eventShowSales) {
     for(var i = allStores.length; i > 0; i--) { //Loop is to delete duplicate rows
         document.getElementById("cookies-table").deleteRow(i);
     } 
-    cookieSales.splice(0, cookieSales.length);
+    cookieSales.splice(0, cookieSales.length); //This is to reset all sales after adding new store to avoid render sales duplicates
     renderAllStores();
 };
 
