@@ -109,7 +109,6 @@ var CookieStore = function(name, minCust, maxCust, avgSale) {
         //Appending child 'table-row' to parent 'table'
         tableEl.appendChild(tabRowEl);
         
-        //var sumTotal = [];
         var arrLength = storesTimes.length + 1;
         var sumTotalSize = arrLength;
         //Nested array to sort original array into columns and rows
@@ -153,19 +152,18 @@ storesTimes = ['6am','7am','8am','9am','10am','11am','12pm','1pm','2pm','3pm','4
 var renderAllStores = function() {
     for(var i in allStores) {
         allStores[i].renderSales();
-    } 
-//salesFooter();
+    }
+salesFooter();
+console.log(sumTotal);
+for(var i = 0; i < sumTotal.length; i++) {
+    sumTotal.splice(sumTotal[i > allStores.length])
+    }
 };
-
+console.log(sumTotal);
 renderAllStores();
+console.log(cookieSales);
 
-//sumTotal.splice(5, 16);
-console.log(cookieSales.length);
-console.log(allStores.length);
-
-rowsSum = allStores.length;
-//console.log(rowsSum);
-
+//var rowCount = document.getElementById("cookies-table").rows.length;
 // This is the event handler, 4 arguments are required of user
 var handlerStoreCreate = function(eventShowSales) {
     eventShowSales.preventDefault();
@@ -176,20 +174,13 @@ var handlerStoreCreate = function(eventShowSales) {
     var averageSales = eventShowSales.target['average-sales'].value;
     var NewStore = new CookieStore(storeName,miniCust,maxiCust,averageSales);
     allStores.push(NewStore); //Adds new store to stores array
-    console.log(NewStore.cookiesSoldPerHour);
+    for(var i = allStores.length; i > 0; i--) { //Loop is to delete duplicate rows
+        document.getElementById("cookies-table").deleteRow(i);
+    } 
+    cookieSales.splice(0, cookieSales.length);
     renderAllStores();
-    //     for(var i = 0; i < cookieSales.length + 1; i++) {
-    //     cookieSales.splice(0, cookieSales.length); //Splice for deleting duplicate store sales values
-    // }
-    cookieSales.splice(0, cookieSales - NewStore.length);
-    console.log(cookieSales.length);
-    salesFooter();
-        for(var i = 1; i < allStores.length; i++) { //Loop is to delete duplicate rows
-        document.getElementById("cookies-table").deleteRow(i); 
-    }
 };
 
 var salesForm = document.getElementById('store-generator-form');
 salesForm.addEventListener('submit', handlerStoreCreate);
 
-    
