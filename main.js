@@ -154,13 +154,13 @@ var renderAllStores = function() {
         allStores[i].renderSales();
     }
 salesFooter();
-console.log(sumTotal);
+
 for(var i = 0; i < sumTotal.length; i++) { //For loop runs through array containing individual store sales and final total
     sumTotal.splice(sumTotal[i > allStores.length]) //This is to reset final total after each iteration
     }
 };
 renderAllStores();
-
+console.log(allStores[0].name)
 //var rowCount = document.getElementById("cookies-table").rows.length;
 // This is the event handler, 4 arguments are required of user
 var handlerStoreCreate = function(eventShowSales) {
@@ -174,6 +174,9 @@ var handlerStoreCreate = function(eventShowSales) {
     allStores.push(NewStore); //Adds new store to stores array
     for(var i = allStores.length; i > 0; i--) { //Loop is to delete duplicate rows
         document.getElementById("cookies-table").deleteRow(i);
+            if(storeName === allStores[i].name) { //To avoid same store name
+                allStores.splice[i].name;
+            } 
     } 
     cookieSales.splice(0, cookieSales.length); //This is to reset all sales after adding new store to avoid render sales duplicates
     renderAllStores();

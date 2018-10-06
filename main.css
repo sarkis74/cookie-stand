@@ -18,6 +18,14 @@ body {
     animation-duration: 45s;
 } 
 
+#home {
+    color: yellow;
+}
+
+#home:link {
+    color: red;
+}
+
 img:hover {
     -webkit-transform: scaleX(-1);
     transform: scaleX(-1);
@@ -59,10 +67,17 @@ label {
    background-color: rgb(39, 35, 35);
 }
 
-#sales-data {
+#store {
     position:absolute;
    top:30px;
    right:20px;
+   background-color: rgb(39, 35, 35);
+}
+
+#sales-data {
+    position:absolute;
+   top:50px;
+   right:30px;
    background-color: rgb(39, 35, 35);
 }
 
@@ -93,7 +108,16 @@ input, textarea {
         background-color: #cccccc;
 }
 
-#main {
-    background-image: url("fish.png");
-    background-color: #cccccc;
+div.pics {
+    vertical-align: left;
+    display: inline-block;
+    text-align: center;
+    width: 120px;
+}
+
+
+.shop {
+    margin-left: 250px;
+    display: block;
+    float: left;
 }
