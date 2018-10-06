@@ -85,3 +85,8 @@ input, textarea {
         background-image: url("chinook.png");
         background-color: #cccccc;
 }
+
+#main {
+    background-image: url("fish.png");
+    background-color: #cccccc;
+}
