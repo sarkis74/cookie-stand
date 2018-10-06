@@ -59,6 +59,13 @@ label {
    background-color: rgb(39, 35, 35);
 }
 
+#sales-data {
+    position:absolute;
+   top:30px;
+   right:20px;
+   background-color: rgb(39, 35, 35);
+}
+
 a {
     color: rgb(131, 182, 202);
 } 
