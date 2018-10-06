@@ -1,3 +1,7 @@
+h1 {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: lightcoral;
+}
 
 @keyframes example {
     0%   {background-color: beige;}
@@ -75,4 +79,9 @@ input, textarea {
 #hours {
     font-weight: bold;
     font-size: 12px;
+}
+
+#contact {
+        background-image: url("chinook.png");
+        background-color: #cccccc;
 }
