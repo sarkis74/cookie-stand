@@ -8,16 +8,22 @@
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     <script src="main.js"></script>
 </head>
-<body id="main">
-<div id="main"><ul class="info">
-<li><a href="contact.html"> Contact Us</a></li>
-<li><a href="about.html" target="_blank">About</a></li>
-<li><a href="mission.html">Our Mission</a></li>
-</ul>
-</div>
-<div id="event"><a href="http://www.issaquahchamber.com/salmondays">Upcoming Events</a></div>
-<div id="sales-data"><a href="sales.html">Sales Data</a></div>
-<div id="store"><a href="shop.html">Online Store</a></div>
+<body>
+<div class="layout">
+<section id="index-box">
+    <ul class="info" id="main">
+    <li><a href="contact.html"> Contact Us</a></li>
+    <li><a href="about.html" target="_blank">About</a></li>
+    <li><a href="#mission">Our Mission</a></li>
+    </ul>
+
+    <ul class="info" id="extra">
+    <li><a href="http://www.issaquahchamber.com/salmondays">Upcoming Events</a></li>
+    <li><a href="sales.html">Sales Data</a></li>
+    <li><a href="shop.html">Online Store</a></li>
+    </ul>
+</section>
+<span id="index">
 <h1 align="center">Pat's Salmon Cookies Main Page</h1>
 <img src="frosted-cookie.jpg" alt="fish shaped cookie" border="3" style="width:350px;height:350px;margin-left:50%;"/>
 <table style="width:100%; margin-left:25%">
@@ -52,6 +58,8 @@
         <td>1702 Alki Ave SW, Seattle, WA 98116</td>
     </tr>
     </table> 
-    <p style="float: left; margin-left: 25%; background-color: lightblue"><font size="3">These delicious cookies are made into the shape of a salmon, and actually made with salmon (though the fish is ground up so fine that you can't even taste it!) that is the ideal match for a steaming cup of coffee on a gray Seattle morning. Or gray Seattle afternoon... whatever.</font></p>
+    <p id="mission">These delicious cookies are made into the shape of a salmon, and actually made with salmon (though the fish is ground up so fine that you can't even taste it!) that is the ideal match for a steaming cup of coffee on a gray Seattle morning. Or gray Seattle afternoon... whatever.<br><br>Our mission is to empower people to snack right. We will lead the future of snacking around Seattle and the US by offering the right snack, for the right moment, made the right way. That means delivering a broader range of delicious, high-quality snacks that nourish life's moments, made with sustainable ingredients and packaging that consumers can feel good about.</p>
+</span>
+</div>
 </body>
 </html>

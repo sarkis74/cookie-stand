@@ -8,13 +8,15 @@
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
 </head>
 </body>
-    <div><a id="home" href="index.html">Back to Main Page</a></div>
-    <h1 align="center">Pat's Salmon Cookies Sales Data</h1>
-    <img id="photo" src="salmon.png" alt="salmon fish" border="3" style="margin-left:10%;"/>
+<div class="layout">
+    <a id="home-link" href="index.html">Back to Main Page</a>
+    <div id="data">
+        <h1 align="center">Pat's Salmon Cookies Sales Data</h1>
+        <img id="photo" src="salmon.png" alt="salmon fish" border="3" style="margin-left:10%;"/>
 
-    <section id="sales-list"></section>
-    <table id="cookies-table" border="1" width="500" style="margin-left:10%; float:left;" cellpadding="5"></table>
-
+        <section id="sales-list"></section>
+        <table id="cookies-table" border="1" width="500" style="margin-left:10%; float:left;" cellpadding="5"></table>
+    </div>
     <form id="store-generator-form">
     <fieldset>
         <legend>Store Sales Generator</legend>
@@ -35,6 +37,7 @@
 
     </fieldset>
     </form>
+    </div>
     <script type="text/javascript" src="main.js"></script>
 </html>
 

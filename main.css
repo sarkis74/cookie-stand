@@ -3,13 +3,6 @@ h1 {
     background-color: lightcoral;
 }
 
-@keyframes example {
-    0%   {background-color: beige;}
-    25%  {background-color: rgb(194, 236, 190);}
-    50%  {background-color: rgb(0, 140, 255);}
-    100% {background-color: rgb(98, 132, 138);}
-}
-
 body {
     width: 900px;
     height: 900px;
@@ -18,25 +11,22 @@ body {
     animation-duration: 45s;
 } 
 
-#home {
-    color: yellow;
+a {
+    color: rgb(131, 182, 202);
+} 
+
+/* sales.html block */
+@keyframes example {
+    0%   {background-color: beige;}
+    25%  {background-color: rgb(194, 236, 190);}
+    50%  {background-color: rgb(0, 140, 255);}
+    100% {background-color: rgb(98, 132, 138);}
 }
 
-#home:link {
-    color: red;
-}
-
-img:hover {
+#photo:hover { /* Salmon pic animation */
     -webkit-transform: scaleX(-1);
     transform: scaleX(-1);
 }
-
-p {
-    font-weight:400;
-    color: black;
-    font-size: 25px;
-    padding-left: 100px;
-} 
 
 #cookies-table {
     border: rgb(36, 28, 18);
@@ -45,45 +35,6 @@ p {
 
 tr:nth-child(odd) {background: #CCC}
 tr:nth-child(even) {background: #FFF}
-
-label {
-    display: inline-block;
-    width: 800px;
-    text-align: left;
-}
-
-.info li {
-    display: inline;
-    border: 2px solid rgb(57, 68, 57);
-    padding: 5px;
-    margin: 1px;
-    background-color: black;
-}
-
-#event {
-    position:absolute;
-   top:10px;
-   right:10px;
-   background-color: rgb(39, 35, 35);
-}
-
-#store {
-    position:absolute;
-   top:30px;
-   right:20px;
-   background-color: rgb(39, 35, 35);
-}
-
-#sales-data {
-    position:absolute;
-   top:50px;
-   right:30px;
-   background-color: rgb(39, 35, 35);
-}
-
-a {
-    color: rgb(131, 182, 202);
-} 
 
 legend {
     font-weight: bold;
@@ -98,26 +49,69 @@ input, textarea {
     background-color : #d1d1d1;
   }
 
-#hours {
-    font-weight: bold;
-    font-size: 12px;
+label {
+    display: inline-block;
+    width: 800px;
+    text-align: left;
 }
 
-#contact {
-        background-image: url("chinook.png");
-        background-color: #cccccc;
+#home-link { /* Back to main page link */
+    background-color: black;
+    color: yellow;
 }
 
+#home:link { /* Back to main page link */
+    color: red;
+}
+
+#data {
+    margin-left: 300px; 
+}
+/* End of sales.html block */
+
+/* index.html block */
+#extra { 
+    position: relative;
+    top: -30px;
+    left: 90%;
+
+}
+
+p {
+    font-weight:400;
+    color: white;
+    font-size: 25px;
+    text-shadow: 1px 1px;
+    padding-left: 100px;
+    background-image: url("chinook.png");
+    background-color: #cccccc;
+    height: 800px;
+    width: 1500px;
+    margin-top: 500px;
+} 
+
+.info li {
+    display: inline;
+    border: 2px solid rgb(57, 68, 57);
+    padding: 5px;
+    margin: 1px;
+    background-color: black;
+}
+
+/* End of index.html block */
+
+/* shop.html block */
 div.pics {
+    font-size: 30px;
     vertical-align: left;
     display: inline-block;
     text-align: center;
     width: 120px;
 }
 
-
-.shop {
+.merchandise {
     margin-left: 250px;
     display: block;
     float: left;
 }
+/* End of shop.html block */

@@ -7,14 +7,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     <script src="main.js"></script>
+    <style>
+    .merchandise {display: none;}
+    </style>
 </head>
 <body>
     <div><a href="index.html">Back to Main Page</a></div>
     <h1>Pat's Cookies Merchandise</h1>
-    <div class="pics">
-        <span class="shop"><img src="cutter.jpg" alt="cookie cutter" border="3" style="margin-left:250px;"/>cookie cutter</span>
-        <span class="shop"><img src="fish.jpg" alt="fish sticker" border="3" style="margin-left: 250px;"/>stickers</span>
-        <span class="shop"><img  src="shirt.jpg" alt="cookie cutter" border="3" style="margin-left:250px;"/>t-shirt</span>
+    
+    <div class="pics" style="max-width: 500px">
+        <div class="merchandise"><img src="cutter.jpg" alt="cookie cutter" border="3" style="margin-left:50px; width: 500px"/>cookie cutters</div>
+        <div class="merchandise"><img src="fish.jpg" alt="fish sticker" border="3" style="margin-left:50px; width: 500px"/>stickers</div>
+        <div class="merchandise"><img  src="shirt.jpg" alt="cookie cutter" border="3" style="margin-left:50px; width: 500px"/>t-shirts</div>
+        <div class="merchandise"><img src="mug.jpg" alt="cookie cutter" border="3" style="margin-left:50px; width: 500px"/>mugs</div>
     </div>
+    <!-- From www.w3schools.com -->
+    <script>
+    var slideIndex = 0;
+    carousel();
+
+    function carousel() {
+        var i;
+        var prod = document.getElementsByClassName("merchandise");
+        for (i = 0; i < prod.length; i++) {
+        prod[i].style.display = "none"; 
+        }
+        slideIndex++;
+        if (slideIndex > prod.length) {slideIndex = 1} 
+        prod[slideIndex-1].style.display = "block"; 
+        setTimeout(carousel, 2000); // Change image every 2 seconds
+    }
+    </script> 
 </body>
 </html>

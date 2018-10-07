@@ -174,9 +174,9 @@ var handlerStoreCreate = function(eventShowSales) {
     allStores.push(NewStore); //Adds new store to stores array
     for(var i = allStores.length; i > 0; i--) { //Loop is to delete duplicate rows
         document.getElementById("cookies-table").deleteRow(i);
-            if(storeName === allStores[i].name) { //To avoid same store name
-                allStores.splice[i].name;
-            } 
+            // if(storeName === allStores[i].name) { //To avoid same store name
+            //     allStores.splice[i].name;
+            // } 
     } 
     cookieSales.splice(0, cookieSales.length); //This is to reset all sales after adding new store to avoid render sales duplicates
     renderAllStores();
@@ -184,4 +184,5 @@ var handlerStoreCreate = function(eventShowSales) {
 
 var salesForm = document.getElementById('store-generator-form');
 salesForm.addEventListener('submit', handlerStoreCreate);
+
 
