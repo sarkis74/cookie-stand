@@ -138,6 +138,7 @@ var CookieStore = function(name, minCust, maxCust, avgSale) {
         
 var cookieSales = []; //Array for sales data
 var sumTotal = []; //Array for sales data plus total
+var newStores = []; //New store tracker
     
 var pikePlace = new CookieStore('1st and Pike', 23, 65, 6.3);
 var seaTac = new CookieStore('SeaTac', 3, 24, 1.2);
@@ -160,8 +161,7 @@ for(var i = 0; i < sumTotal.length; i++) { //For loop runs through array contain
     }
 };
 renderAllStores();
-console.log(allStores[0].name)
-//var rowCount = document.getElementById("cookies-table").rows.length;
+
 // This is the event handler, 4 arguments are required of user
 var handlerStoreCreate = function(eventShowSales) {
     eventShowSales.preventDefault();
@@ -172,11 +172,17 @@ var handlerStoreCreate = function(eventShowSales) {
     var averageSales = eventShowSales.target['average-sales'].value;
     var NewStore = new CookieStore(storeName,miniCust,maxiCust,averageSales);
     allStores.push(NewStore); //Adds new store to stores array
+    newStores.push(NewStore); //To keep track of new stores for 8 lines directly below
+    for(var i = 0; i < allStores.length - newStores.length; i++) {
+        if(storeName === allStores[i].name) { //To avoid same store name
+            confirm('This store name is the same as one on file. Would you like to proceed?') //Gives user opt out choice
+            if(confirm === false) {
+                return false;
+            }
+        }
+    }
     for(var i = allStores.length; i > 0; i--) { //Loop is to delete duplicate rows
         document.getElementById("cookies-table").deleteRow(i);
-            // if(storeName === allStores[i].name) { //To avoid same store name
-            //     allStores.splice[i].name;
-            // } 
     } 
     cookieSales.splice(0, cookieSales.length); //This is to reset all sales after adding new store to avoid render sales duplicates
     renderAllStores();
