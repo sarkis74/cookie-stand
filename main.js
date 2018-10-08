@@ -175,7 +175,7 @@ var handlerStoreCreate = function(eventShowSales) {
     newStores.push(NewStore); //To keep track of new stores for 8 lines directly below
     for(var i = 0; i < allStores.length - newStores.length; i++) {
         if(storeName === allStores[i].name) { //To avoid same store name
-            confirm('This store name is the same as one on file. Would you like to proceed?') //Gives user opt out choice
+            confirm('This store name is the same as the one on file. Would you like to proceed?') //Gives user opt out choice
             if(confirm === false) {
                 return false;
             }
